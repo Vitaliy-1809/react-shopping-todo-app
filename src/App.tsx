@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FC, useState } from "react";
+import TodoList from "./components/TodoList";
+import { useDispatch } from "react-redux";
+import "./App.css";
+import { addTodo } from "./store/todos/todosSlice";
+import InputField from "./components/InputField";
 
-function App() {
+const App: FC = () => {
+  const [todoTitle, setTodoTitle] = useState("");
+
+  const dispatch = useDispatch();
+
+  const addTask = () => {
+    dispatch(addTodo({ title: todoTitle }));
+    setTodoTitle("");
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <InputField
+        todoTitle={todoTitle}
+        handleInput={setTodoTitle}
+        handleSubmit={addTask}
+      />
+      <TodoList />
     </div>
   );
-}
+};
 
 export default App;
