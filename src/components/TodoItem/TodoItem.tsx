@@ -1,6 +1,9 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
-import { removeTodo, Todo } from "../../store/todos/todosSlice";
+import { Trash } from "tabler-icons-react";
+import { removeTodo } from "../../store/todos/todosSlice";
+import { Todo } from "../../store/todos/types";
+import { StyledIcon, StyledLi, StyledTodoItem } from "./TodoItem.styles";
 
 interface Props {
   todo: Todo;
@@ -10,10 +13,16 @@ const TodoItem: FC<Props> = ({ todo }) => {
   const dispatch = useDispatch();
 
   return (
-    <li>
-      <span>{todo.title}</span>
-      <span onClick={() => dispatch(removeTodo({ id: todo.id }))}>&times;</span>
-    </li>
+    <StyledTodoItem>
+      <StyledLi>
+        <span>
+          <span>{todo.title}</span> - <span>${todo.price}</span>
+        </span>
+        <StyledIcon onClick={() => dispatch(removeTodo({ id: todo.id }))}>
+          <Trash size={20} color="white" />
+        </StyledIcon>
+      </StyledLi>
+    </StyledTodoItem>
   );
 };
 

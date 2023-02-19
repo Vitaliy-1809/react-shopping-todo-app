@@ -1,29 +1,35 @@
 import React, { FC, useState } from "react";
-import TodoList from "./components/TodoList";
 import { useDispatch } from "react-redux";
-import "./App.css";
 import { addTodo } from "./store/todos/todosSlice";
-import InputField from "./components/InputField";
+import Form from "./components/Form";
+import TodoList from "./components/TodoList";
+import { StyledApp, StyledAppTitle } from "./App.styles";
 
 const App: FC = () => {
   const [todoTitle, setTodoTitle] = useState("");
+  const [todoPrice, setTodoPrice] = useState("");
 
   const dispatch = useDispatch();
 
-  const addTask = () => {
-    dispatch(addTodo({ title: todoTitle }));
+  const addNewTodo = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(addTodo({ title: todoTitle, price: todoPrice }));
     setTodoTitle("");
+    setTodoPrice("");
   };
 
   return (
-    <div>
-      <InputField
+    <StyledApp>
+      <StyledAppTitle>Grocery shopping list</StyledAppTitle>
+      <Form
         todoTitle={todoTitle}
-        handleInput={setTodoTitle}
-        handleSubmit={addTask}
+        todoPrice={todoPrice}
+        setTodoTitle={setTodoTitle}
+        setTodoPrice={setTodoPrice}
+        handleSubmit={addNewTodo}
       />
       <TodoList />
-    </div>
+    </StyledApp>
   );
 };
 
