@@ -18,7 +18,9 @@ const TodoList: FC = () => {
   return (
     <StyledTodoList>
       {todos.length === 0 && (
-        <StyledDefaultTitle>Add some products to buy...</StyledDefaultTitle>
+        <StyledDefaultTitle>
+          Add some products to the list...
+        </StyledDefaultTitle>
       )}
       {todos.length > 0 && <StyledListTitle>Products list:</StyledListTitle>}
       <ul>

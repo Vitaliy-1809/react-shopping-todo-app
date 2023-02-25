@@ -1,44 +1,41 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
+import { useDispatch } from "react-redux";
 import { StyledForm } from "./Form.styles";
-import { StyledInput } from "../Input/Input.styles";
-import { StyledButton } from "../Button/Button.styles";
+import { addTodo } from "../../store/todos/todosSlice";
+import Button from "../Button";
+import Input from "../Input";
 
-interface Props {
-  todoTitle: string;
-  todoPrice: string;
-  setTodoTitle: React.Dispatch<React.SetStateAction<string>>;
-  setTodoPrice: React.Dispatch<React.SetStateAction<string>>;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-}
+const Form: FC = () => {
+  const [todoTitle, setTodoTitle] = useState("");
+  const [todoPrice, setTodoPrice] = useState("");
 
-const Form: FC<Props> = ({
-  todoTitle,
-  todoPrice,
-  setTodoTitle,
-  setTodoPrice,
-  handleSubmit,
-}) => {
+  const dispatch = useDispatch();
+
   const isBtnDisabled =
     todoTitle.trim().length === 0 || todoPrice.trim().length === 0;
 
+  const addNewTodo = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(addTodo({ title: todoTitle, price: todoPrice }));
+    setTodoTitle("");
+    setTodoPrice("");
+  };
+
   return (
-    <StyledForm onSubmit={(e) => handleSubmit(e)}>
-      <StyledInput
-        width={"335px"}
-        type="text"
+    <StyledForm onSubmit={addNewTodo}>
+      <Input
+        width="335px"
         placeholder="Type product name..."
         value={todoTitle}
         onChange={(e) => setTodoTitle(e.target.value)}
       />
-      <StyledInput
+      <Input
         type="number"
         placeholder="Type product price..."
         value={todoPrice}
         onChange={(e) => setTodoPrice(e.target.value)}
       />
-      <StyledButton type={"submit"} disabled={isBtnDisabled}>
-        Add product
-      </StyledButton>
+      <Button type="submit" text="Add product" disabled={isBtnDisabled} />
     </StyledForm>
   );
 };
