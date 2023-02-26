@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
 import { StyledForm } from "./Form.styles";
-import { addTodo } from "../../store/todos/todosSlice";
+import { addTodo } from "../../../store/todos/todosSlice";
 import Button from "../Button";
 import Input from "../Input";
 

@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import store from "./store";
-import App from "./App";
+// import AppClassic from "./App.ver1";
+import AppCC from "./App.ver2";
 import reportWebVitals from "./reportWebVitals";
 import GlobalStyles from "./global/global";
 
@@ -13,7 +14,11 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <GlobalStyles />
-      <App />
+      {/* Version 1 - classic approach */}
+      {/* <AppClassic /> */}
+
+      {/* Version 2 - Compound Components approach */}
+      <AppCC />
     </Provider>
   </React.StrictMode>
 );

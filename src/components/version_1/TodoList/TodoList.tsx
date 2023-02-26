@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store";
-import { Todo } from "../../store/todos/types";
+import { RootState } from "../../../store";
+import { Todo } from "../../../store/todos/types";
 import TodoItem from "../TodoItem";
 import {
   StyledDefaultTitle,
