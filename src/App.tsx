@@ -1,15 +1,15 @@
 import React, { FC } from "react";
 import Form from "./components/Form";
 import TodoList from "./components/TodoList";
-import { StyledApp, StyledAppTitle } from "./App.styles";
+import { Container, AppTitle } from "./App.styles";
 
 const App: FC = () => {
   return (
-    <StyledApp>
-      <StyledAppTitle>Grocery shopping list</StyledAppTitle>
+    <Container>
+      <AppTitle>Grocery shopping list</AppTitle>
       <Form />
       <TodoList />
-    </StyledApp>
+    </Container>
   );
 };
 

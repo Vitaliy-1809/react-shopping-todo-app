@@ -11,15 +11,15 @@ const Form: FC = () => {
 
   const dispatch = useDispatch();
 
-  const isBtnDisabled =
-    todoTitle.trim().length === 0 || todoPrice.trim().length === 0;
-
   const addNewTodo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(addTodo({ title: todoTitle, price: todoPrice }));
     setTodoTitle("");
     setTodoPrice("");
   };
+
+  const isBtnDisabled =
+    todoTitle.trim().length === 0 || todoPrice.trim().length === 0;
 
   return (
     <StyledForm onSubmit={addNewTodo}>
