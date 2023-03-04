@@ -16,4 +16,5 @@ export interface AddTodoAction {
 
 export interface DeleteTodoAction {
   id: string;
+  price: string;
 }

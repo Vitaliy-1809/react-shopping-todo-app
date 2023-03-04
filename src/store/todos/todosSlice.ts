@@ -20,20 +20,45 @@ const todosSlice = createSlice({
     addTodo(state, action: PayloadAction<AddTodoAction>) {
       const { title, price } = action.payload;
 
-      state.todos.push({
+      const newTodo = {
         id: new Date().toISOString(),
         title,
         price,
-      });
+      };
+
+      state.todos.push(newTodo);
+      localStorage.setItem(
+        "todos",
+        JSON.stringify([
+          ...JSON.parse(localStorage.getItem("todos") || "[]"),
+          newTodo,
+        ])
+      );
 
       setTotalPrice(state);
+      localStorage.setItem(
+        "totalPrice",
+        JSON.stringify(
+          JSON.parse(localStorage.getItem("totalPrice") as any) + Number(price)
+        )
+      );
     },
     removeTodo(state, action: PayloadAction<DeleteTodoAction>) {
-      const { id } = action.payload;
+      const { id, price } = action.payload;
+      let storageTodos = JSON.parse(localStorage.getItem("todos") as any);
 
       state.todos = state.todos.filter((todo) => todo.id !== id);
 
+      storageTodos = storageTodos.filter((todo: any) => todo.id !== id);
+      localStorage.setItem("todos", JSON.stringify(storageTodos));
+
       setTotalPrice(state);
+      localStorage.setItem(
+        "totalPrice",
+        JSON.stringify(
+          JSON.parse(localStorage.getItem("totalPrice") as any) - Number(price)
+        )
+      );
     },
   },
 });

@@ -18,7 +18,11 @@ const TodoItem: FC<Props> = ({ todo }) => {
         <span>
           <span>{todo.title}</span> - <span>${todo.price}</span>
         </span>
-        <StyledIcon onClick={() => dispatch(removeTodo({ id: todo.id }))}>
+        <StyledIcon
+          onClick={() =>
+            dispatch(removeTodo({ id: todo.id, price: todo.price }))
+          }
+        >
           <Trash size={20} color="white" />
         </StyledIcon>
       </StyledLi>
