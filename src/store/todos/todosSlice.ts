@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AddTodoAction, DeleteTodoAction, Todo, TodosState } from "./types";
+import { AddTodoAction, DeleteTodoAction, TodosState } from "./types";
 
 const initialState: TodosState = {
-  todos: [] as Todo[],
-  totalPrice: 0,
+  todos: JSON.parse(localStorage.getItem("todos") as any) || [],
+  totalPrice: JSON.parse(localStorage.getItem("totalPrice") as any) || 0,
 };
 
 const setTotalPrice = (state: TodosState) => {
